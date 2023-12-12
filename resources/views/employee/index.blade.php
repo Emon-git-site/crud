@@ -22,42 +22,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mamun</td>
-                    <td>Mamun</td>
-                    <td>SWE</td>
-                    <td>70000</td>
-                    <td><span class="badge bg-success">active</span></td>
-                    <td>
-                        <a href="./edit.html" class="btn btn-primary btn-sm">Edit</a>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Mamun</td>
-                    <td>Mamun</td>
-                    <td>SWE</td>
-                    <td>70000</td>
-                    <td><span class="badge bg-success">active</span></td>
-                    <td>
-                        <a href="./edit.html" class="btn btn-primary btn-sm">Edit</a>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Mamun</td>
-                    <td>Mamun</td>
-                    <td>SWE</td>
-                    <td>70000</td>
-                    <td><span class="badge bg-warning">inactive</span></td>
-                    <td>
-                        <a href="./edit.html" class="btn btn-primary btn-sm">Edit</a>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
+
+            @foreach ($employees as $key=>$employee)
+                
+            <tr>
+                <td>{{++$key}}</td>
+                <td>{{$employee->name}}</td>
+                <td>{{$employee->name}}</td>
+                <td>{{$employee->designation}}</td>
+                <td>{{$employee->salary}}</td>
+                <td>
+                    @if ($employee->status == 1)
+                         <span class="badge bg-success">active</span>
+                    @else
+                         <span class="badge bg-warning">inactive</span>
+                    @endif
+                </td>
+                <td>
+                    <a href="{{route('employee.edit', $employee->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{route('employee.delete', $employee->id)}}"  class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            @endforeach
+
             </tbody>
         </table>
     </div>

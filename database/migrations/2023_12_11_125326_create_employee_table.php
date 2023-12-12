@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('designation');
             $table->string('image')->nullable();
             $table->integer('salary');
-            $table->boolean('status');
+            $table->boolean('status')->nullable();
             $table->timestamps();
         });
     }

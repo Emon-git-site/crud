@@ -5,16 +5,16 @@
 
             <div class="card my-4 px-0 container">
                 <div class="card-header">
-                    <h3>Add Employees</h3>
+                    <h3>Edit Employees</h3>
                 </div>
 
                 <div class="card-body">
 
-                    <form action="{{route('employee.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('employee.update', $employee->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input class="form-control" type="text" name="name">
+                            <input class="form-control" type="text" name="name" value="{{$employee->name}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Photo</label>
@@ -22,14 +22,15 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Designation</label>
-                            <input class="form-control" type="text" name="designation">
+                            <input class="form-control" type="text" name="designation" value="{{$employee->designation}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Salary</label>
-                            <input class="form-control" type="number" name="salary">
+                            <input class="form-control" type="number" name="salary" value="{{$employee->salary}}">
                         </div>
                         <div class="form-check  mb-3">
-                            <input class="form-check-input" type="checkbox" value=1 name="status">
+                            <input class="form-check-input" type="checkbox" value=1 name="status" 
+                            @if ($employee->status == 1) checked                          @endif>
                             <label class="form-check-label" for=""> Default checkbox </label>
                         </div>
 

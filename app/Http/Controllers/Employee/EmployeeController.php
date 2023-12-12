@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB; 
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -12,7 +13,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('employee.index');
+        $employees = DB::table('employee')->get();
+        return view('employee.index', compact('employees'));
     }
 
     /**
@@ -20,7 +22,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employee.create Employee');
+        return view('employee.createEmployee');
     }
 
     /**
@@ -28,7 +30,16 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'name' => $request->name,
+            'designation' => $request->designation,
+            'salary' => $request->salary,
+            'status' => $request->status,
+        ];
+
+        DB::table('employee')->insert($data) ;
+
+        return redirect()->route('employee');
     }
 
     /**
@@ -44,7 +55,8 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $employee = DB::table('employee')->where('id', $id)->first();
+        return view('employee.editEmployee', compact('employee'));
     }
 
     /**
@@ -52,7 +64,16 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = [
+            'name' => $request->name,
+            'designation' => $request->designation,
+            'salary' => $request->salary,
+            'status' => $request->status,
+        ];
+
+        DB::table('employee')->where('id', $id)->update($data) ;
+
+        return redirect()->route('employee');
     }
 
     /**
@@ -60,6 +81,8 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('employee')->where('id', $id)->delete() ;
+
+        return redirect()->route('employee');
     }
 }
